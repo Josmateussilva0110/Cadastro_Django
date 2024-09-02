@@ -10,7 +10,7 @@
         <form method="POST" action="{% url 'cadastro:register_user' %}">
             {% csrf_token %}
             <div class="form-group">
-                <label for="{{ form.username.id_for_label }}">Username</label>
+                <label for="{{ form.username.id_for_label }}">Username*</label>
                 {{ form.username }}
                 {% if form.username.errors %}
                     <div class="error">{{ form.username.errors }}</div>
@@ -18,7 +18,7 @@
             </div>
 
             <div class="form-group">
-                <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                <label for="{{ form.first_name.id_for_label }}">First Name*</label>
                 {{ form.first_name }}
                 {% if form.first_name.errors %}
                     <div class="error">{{ form.first_name.errors }}</div>
@@ -34,7 +34,7 @@
             </div>
 
             <div class="form-group">
-                <label for="{{ form.email.id_for_label }}">Email</label>
+                <label for="{{ form.email.id_for_label }}">Email*</label>
                 {{ form.email }}
                 {% if form.email.errors %}
                     <div class="error">{{ form.email.errors }}</div>
@@ -42,7 +42,7 @@
             </div>
 
             <div class="form-group">
-                <label for="{{ form.password.id_for_label }}">Password</label>
+                <label for="{{ form.password.id_for_label }}">Password*</label>
                 {{ form.password }}
                 {% if form.password.errors %}
                     <div class="error">{{ form.password.errors }}</div>
@@ -50,7 +50,7 @@
             </div>
 
             <div class="form-group">
-                <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                <label for="{{ form.password2.id_for_label }}">Confirm Password*</label>
                 {{ form.password2 }}
                 {% if form.password2.errors %}
                     <div class="error">{{ form.password2.errors }}</div>
@@ -67,7 +67,7 @@
                 <div class="modal-content">
                     <p>{% for message in messages %}{{ message }}{% endfor %}</p>
                     <form method="GET" action="{% url 'cadastro:index' %}">
-                        <button type="submit">OK</button>
+                        <button type="submit" class="btn btn-send">OK</button>
                     </form>
                 </div>
             </div>
