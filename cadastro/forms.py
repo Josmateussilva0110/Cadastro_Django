@@ -7,12 +7,23 @@ from cadastro.models import Person
 
 
 class Register_User(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput(),  label='password')
-    password2 = forms.CharField(widget=forms.PasswordInput(), label='confirm password')
-
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Your password'}),
+        label='password'
+    )
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Confirm password'}),
+        label='confirm password'
+    )
     class Meta:
         model = Person
         fields = ['username', 'first_name', 'last_name', 'email', 'password',]
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder': 'Your name'}),
+            'first_name': forms.TextInput(attrs={'placeholder': 'Your first name'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Your last name'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Your e-mail'}),
+        }
     
 
     def clean(self):

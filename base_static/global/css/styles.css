@@ -148,19 +148,6 @@ p {
     text-align: center;
 }
 
-button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #4CAF50; 
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #45a049; 
-}
 
 .form-container {
     display: flex;
@@ -175,4 +162,77 @@ button:hover {
     text-align: center;
     max-width: 100%;
     padding: 1rem;
+}
+
+.form h1 {
+    font-size: 5rem;
+    padding-bottom: 2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1.2rem;
+}
+
+.form-group label {
+    text-align: left;
+    font-size: 1.4rem;
+}
+
+
+.form-group input, .form-group select {
+    padding: 1rem;
+    border: 2px solid var(--white-color); 
+    border-radius: 5px; 
+    transition: border-color 0.3s ease; 
+}
+
+.form-group input:hover, .form-group select:hover {
+    outline: none;
+    border-color: var(--yellow-color); 
+    box-shadow: 0 0 0 2px var(--yellow-color);
+}
+
+.btn-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    color: var(--white-color);
+    border: none;
+    border-radius: 5px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-send {
+    background-color: #28a745;
+}
+
+.btn-cancel {
+    background-color: #dc3545;;
+}
+
+.btn:hover {
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.btn-send:hover {
+    background-color: #218838;
+}
+
+.btn-cancel:hover {
+    background-color: #c82333;
+}
+
+.btn:focus {
+    outline: none; 
+    box-shadow: 0 0 0 3px var(--black-color); 
 }
