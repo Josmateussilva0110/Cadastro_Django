@@ -1,0 +1,54 @@
+{% extends "cadastro/base.html" %}
+
+{% block content %}
+<div class="menu-spacing"></div>
+
+<div class="form-container">
+    <div class="form">
+        <h1>Login de Usuário</h1>
+        
+        {% if login_success %}
+            <div class="modal" id="success-modal">
+                <div class="modal-content">
+                    <p>{% for message in messages %}{{ message }}{% endfor %}</p>
+                    <form method="GET" action="{% url 'cadastro:index' %}">
+                        <button type="submit" class="btn btn-send">OK</button>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <form method="POST" action="{% url 'cadastro:login_user' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">Username*</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <div class="error">{{ form.username.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.password.id_for_label }}">Password*</label>
+                    {{ form.password }}
+                    {% if form.password.errors %}
+                        <div class="error">{{ form.password.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-send">Send</button>
+                    <button type="reset" class="btn btn-cancel">Cancel</button>
+                </div>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                            <div class="error">{{ message }}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

@@ -72,3 +72,10 @@ class Register_User(forms.ModelForm):
         if commit:
             person.save()
         return person
+
+
+class Login_user(forms.Form):
+    username = forms.CharField(max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Your username'}))
+     
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Your password'}))
+    

@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
-from cadastro.forms import Register_User
+from cadastro.forms import Register_User, Login_user
+from django.contrib.auth import authenticate, login
 
 
 def index(request):
@@ -20,3 +21,24 @@ def register_user(request):
     context['form'] = form
     context['page_title'] = 'Cadastro'
     return render(request, 'cadastro/pages/cadastrar.html', context)
+
+
+def login_user(request):
+    context = dict()
+    if request.method == 'POST':
+        form = Login_user(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)  
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'Login realizado com sucesso.')
+                context['login_success'] = True
+            else:
+                messages.error(request, 'Login inválido.')
+    else:
+        form = Login_user()
+    context['form'] = form
+    context['page_title'] = 'Login'
+    return render(request, 'cadastro/pages/login.html', context)
