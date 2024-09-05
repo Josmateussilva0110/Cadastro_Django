@@ -15,8 +15,12 @@
             <nav>
                 <ul>
                     <li><a href="{% url "cadastro:register_user" %}">Cadastrar</a></li>
-                    <li><a href=" {% url "cadastro:login_user" %}">Login</a></li>
-                    <li><a href="#">link3 </a></li>
+                    {% if user.is_authenticated %}
+                        <li><a>Olá, {{ user.username }}</a></li>
+                        <li><a href="{% url "cadastro:logout_user" %}">Sair</a></li>
+                    {% else %}
+                        <li><a href=" {% url "cadastro:login_user" %}">Login</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>

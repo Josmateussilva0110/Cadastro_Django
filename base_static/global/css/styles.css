@@ -242,6 +242,24 @@ p {
     box-shadow: 0 0 0 3px var(--black-color); 
 }
 
+.btn-ajusts {
+    display: flex;
+    justify-content: left;
+    gap: 1rem;
+}
+
+.btn-ajusts a {
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    background-color: #c82333;
+    color: var(--white-color);
+    border: none;
+    border-radius: 5px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
 .error {
     color:#ff0000;
     font-size: 1.4rem;

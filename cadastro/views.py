@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
 from cadastro.forms import Register_User, Login_user
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect
 
 
 def index(request):
@@ -42,3 +43,11 @@ def login_user(request):
     context['form'] = form
     context['page_title'] = 'Login'
     return render(request, 'cadastro/pages/login.html', context)
+
+
+def logout_user(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('cadastro:index')
+    else:
+        return render(request, 'cadastro/pages/logout.html')

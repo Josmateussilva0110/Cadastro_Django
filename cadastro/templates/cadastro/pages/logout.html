@@ -1,0 +1,16 @@
+{% extends "cadastro/base.html" %}
+
+{% block content %}
+<div class="menu-spacing"></div>
+
+<h1>Do you want to log out of the account? </h1>
+<form method="POST" action="{% url 'cadastro:logout_user' %}">
+    {% csrf_token %}
+    <div class="btn-ajusts">
+        <div class="btn-group">
+            <button type="submit" class="btn btn-send">Yes</button>
+        </div>
+        <a href="{% url 'cadastro:index' %}" class="btn">Cancelar</a>
+    </div>
+</form>
+{% endblock content %}
