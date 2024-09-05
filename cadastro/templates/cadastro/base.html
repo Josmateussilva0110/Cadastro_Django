@@ -16,6 +16,7 @@
                 <ul>
                     <li><a href="{% url "cadastro:register_user" %}">Cadastrar</a></li>
                     {% if user.is_authenticated %}
+                        <li><a href="{% url "cadastro:list_users" %}">Listar</a></li>
                         <li><a>Olá, {{ user.username }}</a></li>
                         <li><a href="{% url "cadastro:logout_user" %}">Sair</a></li>
                     {% else %}

@@ -4,6 +4,7 @@ from django.urls import reverse
 from cadastro.forms import Register_User, Login_user
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -51,3 +52,11 @@ def logout_user(request):
         return redirect('cadastro:index')
     else:
         return render(request, 'cadastro/pages/logout.html')
+
+
+def list_users(request):
+    context = dict()
+    users = User.objects.filter(is_staff=False).order_by('-id')
+    context['users'] = users
+    context['page_title'] = 'Lista de Usuários' 
+    return render(request, 'cadastro/pages/list_users.html', context)

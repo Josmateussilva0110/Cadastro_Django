@@ -3,7 +3,7 @@
 {% block content %}
 <div class="menu-spacing"></div>
 
-<h1>Do you want to log out of the account? </h1>
+<h3>Do you want to log out of the account? </h3>
 <form method="POST" action="{% url 'cadastro:logout_user' %}">
     {% csrf_token %}
     <div class="btn-ajusts">

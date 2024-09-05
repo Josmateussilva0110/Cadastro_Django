@@ -1,0 +1,12 @@
+{% extends "cadastro/base.html" %}
+
+{% block content %}
+<div class="menu-spacing"></div>
+{% for user in users %}
+    usuario: {{user.username}} 
+    Nome: {{user.first_name}}
+    Sobrenome: {{user.last_name}}
+    Email: {{user.email}}
+    <br>
+{% endfor %}
+{% endblock content %}
