@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 
 
+
 def index(request):
     return render(request, 'cadastro/pages/index.html')
 

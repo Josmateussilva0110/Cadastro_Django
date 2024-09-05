@@ -268,3 +268,37 @@ p {
     padding: 0.5rem; 
     border-radius: 0.3rem; 
 }
+
+.user-cards {
+    margin-top: 10rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    border: 1px solid var(--white-color);
+    justify-content: center;
+}
+
+.card {
+    border: 1px solid #ddd;
+    margin: 0.8rem 0.8rem;
+    padding: 18px;
+    border-radius: 10px;
+    width: 300px;
+    background-color: var(--white-color);
+}
+
+.card h3 {
+    text-align: center;
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: var(--black-color);
+}
+
+.card p {
+    margin: 8px 0;
+    color: var(--black-color);
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);;
+}

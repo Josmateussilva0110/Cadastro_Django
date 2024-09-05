@@ -2,11 +2,14 @@
 
 {% block content %}
 <div class="menu-spacing"></div>
-{% for user in users %}
-    usuario: {{user.username}} 
-    Nome: {{user.first_name}}
-    Sobrenome: {{user.last_name}}
-    Email: {{user.email}}
-    <br>
-{% endfor %}
+<div class="user-cards">
+    {% for user in users %}
+        <div class="card">
+            <h3>{{ user.username }}</h3>
+            <p><strong>Nome:</strong> {{ user.first_name }}</p>
+            <p><strong>Sobrenome:</strong> {{ user.last_name }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+        </div>
+    {% endfor %}
+</div>
 {% endblock content %}
