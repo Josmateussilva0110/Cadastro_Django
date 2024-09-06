@@ -279,12 +279,15 @@ p {
 }
 
 .card {
+    display: inline-block;
     border: 1px solid #ddd;
+    width: auto;
     margin: 0.8rem 0.8rem;
     padding: 18px;
     border-radius: 10px;
     width: 300px;
     background-color: var(--white-color);
+    transition: scale 270ms ease-in-out, box-shadow 300ms ease-in-out;
 }
 
 .card h3 {
@@ -300,5 +303,22 @@ p {
 }
 
 .card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    scale: 1.10;
+}
+
+.pagination-wrapper {
+    font-size: 1.6rem;
+}
+
+.step-links {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-links > * {
+    display: block;
+    padding: 0.5rem;
 }

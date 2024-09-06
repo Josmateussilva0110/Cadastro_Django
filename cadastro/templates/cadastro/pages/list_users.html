@@ -2,8 +2,19 @@
 
 {% block content %}
 <div class="menu-spacing"></div>
+
+<div>
+    <form action="#" method="get">
+        <div class="search-content">
+            <label class="sr-only" id="search-label" for="search-input">Search</label>
+            <input type="search" name="search" id="search-input" placeholder="Search" value="{{ search_value }}">
+
+        </div>
+    </form>
+</div>
+
 <div class="user-cards">
-    {% for user in users %}
+    {% for user in page_obj %}
         <div class="card">
             <h3>{{ user.username }}</h3>
             <p><strong>Nome:</strong> {{ user.first_name }}</p>

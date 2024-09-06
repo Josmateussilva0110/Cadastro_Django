@@ -5,6 +5,7 @@ from cadastro.forms import Register_User, Login_user
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 
 
 
@@ -58,6 +59,9 @@ def logout_user(request):
 def list_users(request):
     context = dict()
     users = User.objects.filter(is_staff=False).order_by('-id')
-    context['users'] = users
+    paginator = Paginator(users, 9)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context['page_obj'] = page_obj
     context['page_title'] = 'Lista de Usuários' 
     return render(request, 'cadastro/pages/list_users.html', context)
