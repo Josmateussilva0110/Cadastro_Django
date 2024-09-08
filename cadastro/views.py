@@ -6,7 +6,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
+from django.db.models import Q
+from django.http import Http404
 
+
+PER_PAGE = 8
 
 
 def index(request):
@@ -59,9 +63,26 @@ def logout_user(request):
 def list_users(request):
     context = dict()
     users = User.objects.filter(is_staff=False).order_by('-id')
-    paginator = Paginator(users, 9)
+    paginator = Paginator(users, PER_PAGE)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     context['page_obj'] = page_obj
     context['page_title'] = 'Lista de Usuários' 
+    return render(request, 'cadastro/pages/list_users.html', context)
+
+
+def search(request):
+    context = dict()
+    search_value = request.GET.get('search', '').strip()
+
+    users = User.objects.filter(Q(username__icontains=search_value) | Q(first_name__icontains=search_value) | Q(email__icontains=search_value) | Q(last_name__icontains=search_value)).filter(is_staff=False)
+
+    paginator = Paginator(users, PER_PAGE)  
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context['page_title'] = f'{search_value[:20]}'
+    context['search_value'] = search_value
+    context['page_obj'] = page_obj  
+
     return render(request, 'cadastro/pages/list_users.html', context)

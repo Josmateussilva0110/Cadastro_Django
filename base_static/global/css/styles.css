@@ -270,7 +270,7 @@ p {
 }
 
 .user-cards {
-    margin-top: 10rem;
+    margin-top: 2.3rem;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -283,7 +283,7 @@ p {
     border: 1px solid #ddd;
     width: auto;
     margin: 0.8rem 0.8rem;
-    padding: 18px;
+    padding: 25px;
     border-radius: 10px;
     width: 300px;
     background-color: var(--white-color);
@@ -298,7 +298,7 @@ p {
 }
 
 .card p {
-    margin: 8px 0;
+    margin: 10px 0;
     color: var(--black-color);
 }
 
@@ -321,4 +321,29 @@ p {
 .step-links > * {
     display: block;
     padding: 0.5rem;
+}
+
+.search-content {
+    text-align: center;
+    padding-top: 2.2rem;
+    padding-bottom: 2.2rem;
+    font-size: medium;
+}
+
+.search-label {
+    font-size: 2.2rem;
+}
+
+.search-content input {
+    width: 40rem;
+    font-size: 2.2rem;
+    border: 2px solid var(--white-color);
+    transition: border-color 2000ms ease-in-out;
+    border-radius: 8px;
+}
+
+.search-content input:hover {
+    outline: none;
+    border-color: var(--yellow-color);
+    box-shadow: 0 0 0 2px var(--yellow-color);
 }

@@ -4,9 +4,9 @@
 <div class="menu-spacing"></div>
 
 <div>
-    <form action="#" method="get">
+    <form action=" {% url "cadastro:search" %}" method="get">
         <div class="search-content">
-            <label class="sr-only" id="search-label" for="search-input">Search</label>
+            <label class="search-label" id="search-label" for="search-input">Search</label>
             <input type="search" name="search" id="search-input" placeholder="Search" value="{{ search_value }}">
 
         </div>
@@ -23,4 +23,5 @@
         </div>
     {% endfor %}
 </div>
+{% include 'cadastro/partials/pagination.html' %}
 {% endblock content %}
