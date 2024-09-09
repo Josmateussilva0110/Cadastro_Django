@@ -1,0 +1,22 @@
+{% extends "cadastro/base.html" %}
+
+{% block content %}
+<div class="menu-spacing"></div>
+
+<div class="parent-container">
+    <div class="detail-user">
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>First Name:</strong> {{ user.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+    </div>
+</div>
+
+<div class="btn-content">
+    <a id="update" href="#">Update</a>
+    <a id="delete" href="{% url 'cadastro:index' %}">Delete</a>
+    <a id="cancel" href="{% url 'cadastro:index' %}">Cancel</a>
+</div>
+
+
+{% endblock content %}

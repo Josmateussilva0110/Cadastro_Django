@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
 
 
 PER_PAGE = 8
@@ -86,3 +87,13 @@ def search(request):
     context['page_obj'] = page_obj  
 
     return render(request, 'cadastro/pages/list_users.html', context)
+
+@login_required
+def update_user(request, id):
+    context = dict()
+    user = User.objects.filter(is_staff=False).filter(id=id).first()
+    if user is None:
+        raise Http404
+    context['page_title'] = user
+    context['user'] = user
+    return render(request, 'cadastro/pages/update_user.html', context)

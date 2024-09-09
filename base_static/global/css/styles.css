@@ -278,6 +278,11 @@ p {
     justify-content: center;
 }
 
+
+.user-cards a {
+    text-decoration: None;
+}
+
 .card {
     display: inline-block;
     border: 1px solid #ddd;
@@ -291,9 +296,14 @@ p {
 }
 
 .card h3 {
+    color: var(--black-color);
     text-align: center;
     margin-top: 0;
     font-size: 1.5rem;
+}
+
+.card h3 a {
+    text-decoration: None;
     color: var(--black-color);
 }
 
@@ -346,4 +356,84 @@ p {
     outline: none;
     border-color: var(--yellow-color);
     box-shadow: 0 0 0 2px var(--yellow-color);
+}
+
+.parent-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+}
+
+.detail-user {
+    width: 700px;
+    max-width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 2.4rem;
+    border: 3px solid var(--white-color);
+    border-radius: 15px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    background-color: var(--background-color, white); 
+}
+
+.detail-user p {
+    font-size: 1.8rem;
+    margin: 10px 0; 
+    color: var(--text-color, #333); 
+}
+
+.detail-user strong {
+    font-weight: bold;
+    color: var(--highlight-color, #007bff); 
+}
+
+.btn-content {
+    padding-top: 20px;
+    text-align: center;
+    justify-content: center;
+}
+
+.btn-content a {
+    display: inline-block; 
+    padding: 10px;
+    background-color: var(--white-color);
+    border-radius: 10px;
+    font-size: 2.4rem;
+    margin: 0 5px;
+    color: var(--black-color);
+    text-decoration: none; 
+    transition: transform 0.3s ease; 
+}
+
+.btn-content a:hover {
+    transform: translateY(-5px); 
+}
+
+#update {
+    background-color: var(--green-color);
+    color: var(--black-color);
+}
+
+#update:hover {
+    background-color: #45a049; 
+}
+
+#delete {
+    background-color: rgba(226, 10, 10);
+    color: var(--black-color);
+}
+
+#delete:hover {
+    background-color: rgba(170, 10, 10)
+}
+
+#cancel {
+    background-color: rgb(252, 231, 2);
+    color: var(--black-color);
+}
+
+#cancel:hover {
+    background-color: rgb(252, 180, 2);
 }

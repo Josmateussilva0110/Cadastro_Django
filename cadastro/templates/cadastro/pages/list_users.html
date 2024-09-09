@@ -16,11 +16,13 @@
 <div class="user-cards">
     {% for user in page_obj %}
         <div class="card">
-            <h3>{{ user.username }}</h3>
+            <h3><a href="{% url 'cadastro:update_user' user.id %}">{{ user.username }}</a></h3>
             <p><strong>Nome:</strong> {{ user.first_name }}</p>
             <p><strong>Sobrenome:</strong> {{ user.last_name }}</p>
             <p><strong>Email:</strong> {{ user.email }}</p>
         </div>
+    {% empty %}
+        <h4>Não foi encontrado cadastro.<a href="{% url "cadastro:register_user" %}">Cadastrar</a></h4> 
     {% endfor %}
 </div>
 {% include 'cadastro/partials/pagination.html' %}
