@@ -16,7 +16,7 @@
 <div class="user-cards">
     {% for user in page_obj %}
         <div class="card">
-            <h3><a href="{% url 'cadastro:update_user' user.id %}">{{ user.username }}</a></h3>
+            <h3><a href="{% url 'cadastro:view_user' user.id %}">{{ user.username }}</a></h3>
             <p><strong>Nome:</strong> {{ user.first_name }}</p>
             <p><strong>Sobrenome:</strong> {{ user.last_name }}</p>
             <p><strong>Email:</strong> {{ user.email }}</p>

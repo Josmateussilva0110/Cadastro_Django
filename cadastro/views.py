@@ -89,11 +89,11 @@ def search(request):
     return render(request, 'cadastro/pages/list_users.html', context)
 
 @login_required
-def update_user(request, id):
+def view_user(request, id):
     context = dict()
     user = User.objects.filter(is_staff=False).filter(id=id).first()
     if user is None:
         raise Http404
     context['page_title'] = user
     context['user'] = user
-    return render(request, 'cadastro/pages/update_user.html', context)
+    return render(request, 'cadastro/pages/view_user.html', context)
