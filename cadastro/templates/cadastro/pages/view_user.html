@@ -5,15 +5,15 @@
 
 <div class="parent-container">
     <div class="detail-user">
-        <p><strong>Username:</strong> {{ user.username }}</p>
-        <p><strong>First Name:</strong> {{ user.first_name }}</p>
-        <p><strong>Last Name:</strong> {{ user.last_name }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Username:</strong> {{ current_user.username }}</p>
+        <p><strong>First Name:</strong> {{ current_user.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ current_user.last_name }}</p>
+        <p><strong>Email:</strong> {{ current_user.email }}</p>
     </div>
 </div>
 
 <div class="btn-content">
-    <a id="update" href="{% url 'cadastro:update_user' user.id %}">Update</a>
+    <a id="update" href="{% url 'cadastro:update_user' current_user.id %}">Update</a>
     <a id="delete" href="{% url 'cadastro:index' %}">Delete</a>
     <a id="cancel" href="{% url 'cadastro:list_users' %}">Cancel</a>
 </div>

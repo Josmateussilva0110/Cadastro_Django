@@ -7,7 +7,7 @@
 <div class="form-container">
     <div class="form">
         <h1>Atualizar Usuário</h4>
-        <form method="POST" action="{% url 'cadastro:update_user' user.id %}">
+        <form method="POST" action="{% url 'cadastro:update_user' current_user.id %}">
             {% csrf_token %}
             <div class="form-group">
                 <label for="{{ form.username.id_for_label }}">Username*</label>

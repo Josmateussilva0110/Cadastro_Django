@@ -91,34 +91,36 @@ def search(request):
 @login_required
 def view_user(request, id):
     context = dict()
-    user = User.objects.filter(is_staff=False).filter(id=id).first()
-    if user is None:
+    current_user = User.objects.filter(is_staff=False).filter(id=id).first()
+    if current_user is None:
         raise Http404
-    context['page_title'] = user
-    context['user'] = user
+    context['page_title'] = current_user
+    context['current_user'] = current_user
     return render(request, 'cadastro/pages/view_user.html', context)
 
 
 @login_required
 def update_user(request, id):
     context = dict()
-    user = User.objects.filter(is_staff=False).filter(id=id).first()
-    if not user:
+    current_user = User.objects.filter(is_staff=False).filter(id=id).first()
+    print(current_user)
+    
+    if not current_user:
         messages.error(request, 'Usuário não encontrado.')
         return redirect('cadastro:index')
     
     if request.method == 'POST':
-        form = Update_User(data=request.POST, instance=user)
+        form = Update_User(data=request.POST, instance=current_user)
         if form.is_valid():
             form.save()
             messages.success(request, 'Dados atualizados com sucesso.')
-            return redirect('cadastro:update_user', user.id)
+            return redirect('cadastro:update_user', id=current_user.id)
         else:
             context['form'] = form
     else:
-        form = Update_User(instance=user)
+        form = Update_User(instance=current_user)
         context['form'] = form
-    context['user'] = user
     
+    context['current_user'] = current_user
     context['page_title'] = 'Update User'
     return render(request, 'cadastro/pages/update_user.html', context)
