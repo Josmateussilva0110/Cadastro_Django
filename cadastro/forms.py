@@ -78,4 +78,49 @@ class Login_user(forms.Form):
     username = forms.CharField(max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Your username'}))
      
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Your password'}))
+
+
+class Update_User(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email',]
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder': 'Your name'}),
+            'first_name': forms.TextInput(attrs={'placeholder': 'Your first name'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Your last name'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Your e-mail'}),
+        }
+
+
+    def clean(self):
+        cleaned_data = super().clean()
+        first_name = cleaned_data.get("first_name")
+        last_name = cleaned_data.get("last_name")
+
+        if first_name == last_name:
+            msg = ValidationError('Os nomes precisa ser diferentes.', code='invalid')
+            self.add_error('last_name', msg)
     
+        return cleaned_data
+    
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        current_email = self.instance.email
+        if current_email != email:
+            if User.objects.filter(email=email).exists():
+                self.add_error('email', ValidationError('Email já existe', code='invalid'))
+        return email
+    
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        current_username = self.instance.username
+        if current_username != username:
+            if User.objects.filter(username=username).exists():
+                self.add_error('username', ValidationError('Usuário já existe.', code='invalid'))
+        return username
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if commit:
+            user.save()
+        return user
