@@ -1,9 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.urls import reverse
 from cadastro.forms import Register_User, Login_user, Update_User
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -13,12 +11,12 @@ from django.contrib.auth.decorators import login_required
 
 PER_PAGE = 8
 
-
 def index(request):
     context = dict()
     users = User.objects.all().filter(is_staff=False)
     context['number_people'] = len(users)
     return render(request, 'cadastro/pages/index.html', context)
+
 
 def register_user(request):
     context = dict()
@@ -54,8 +52,10 @@ def login_user(request):
     context['form'] = form
     context['page_title'] = 'Login'
     return render(request, 'cadastro/pages/login.html', context)
+    
 
-@login_required
+
+@login_required(login_url='cadastro:login_user')
 def logout_user(request):
     if request.method == 'POST':
         logout(request)
@@ -64,10 +64,12 @@ def logout_user(request):
         return render(request, 'cadastro/pages/logout.html')
 
 
-@login_required
+@login_required(login_url='cadastro:login_user')
 def list_users(request):
     context = dict()
     users = User.objects.filter(is_staff=False).order_by('-id')
+    if not users:
+        raise Http404()
     paginator = Paginator(users, PER_PAGE)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -75,7 +77,8 @@ def list_users(request):
     context['page_title'] = 'Lista de Usuários' 
     return render(request, 'cadastro/pages/list_users.html', context)
 
-@login_required
+
+@login_required(login_url='cadastro:login_user')
 def search(request):
     context = dict()
     search_value = request.GET.get('search', '').strip()
@@ -92,25 +95,20 @@ def search(request):
 
     return render(request, 'cadastro/pages/list_users.html', context)
 
-@login_required
+
+@login_required(login_url='cadastro:login_user')
 def view_user(request, id):
     context = dict()
-    current_user = User.objects.filter(is_staff=False).filter(id=id).first()
-    if current_user is None:
-        raise Http404
+    current_user = get_object_or_404(User, is_staff=False, id=id)
     context['page_title'] = current_user
     context['current_user'] = current_user
     return render(request, 'cadastro/pages/view_user.html', context)
 
 
-@login_required
+@login_required(login_url='cadastro:login_user')
 def update_user(request, id):
     context = dict()
-    current_user = User.objects.filter(is_staff=False).filter(id=id).first()
-    
-    if not current_user:
-        messages.error(request, 'Usuário não encontrado.')
-        return redirect('cadastro:index')
+    current_user = get_object_or_404(User, is_staff=False, id=id)
     
     if request.method == 'POST':
         form = Update_User(data=request.POST, instance=current_user)
@@ -129,14 +127,10 @@ def update_user(request, id):
     return render(request, 'cadastro/pages/update_user.html', context)
 
 
-@login_required
+@login_required(login_url='cadastro:login_user')
 def delete_user(request, id):
     context = dict()
-    current_user = User.objects.filter(is_staff=False).filter(id=id).first()
-    confirmation = request.POST.get('confirmation', 'no')
-    if not current_user:
-        messages.error(request, 'Usuário não encontrado.')
-        return redirect('cadastro:index')
+    current_user = get_object_or_404(User, is_staff=False, id=id)
     if request.method == 'POST':
         current_user.delete()
         messages.success(request, 'Usuário deletado com sucesso.')
@@ -144,5 +138,4 @@ def delete_user(request, id):
 
     context['page_title'] = 'Delete User'
     context['current_user'] = current_user
-    context['confirmation'] = confirmation
     return render(request, 'cadastro/pages/delete_user.html', context)
