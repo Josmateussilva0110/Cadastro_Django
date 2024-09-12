@@ -15,7 +15,10 @@ PER_PAGE = 8
 
 
 def index(request):
-    return render(request, 'cadastro/pages/index.html')
+    context = dict()
+    users = User.objects.all().filter(is_staff=False)
+    context['number_people'] = len(users)
+    return render(request, 'cadastro/pages/index.html', context)
 
 def register_user(request):
     context = dict()
@@ -52,7 +55,7 @@ def login_user(request):
     context['page_title'] = 'Login'
     return render(request, 'cadastro/pages/login.html', context)
 
-
+@login_required
 def logout_user(request):
     if request.method == 'POST':
         logout(request)
@@ -61,6 +64,7 @@ def logout_user(request):
         return render(request, 'cadastro/pages/logout.html')
 
 
+@login_required
 def list_users(request):
     context = dict()
     users = User.objects.filter(is_staff=False).order_by('-id')
@@ -71,7 +75,7 @@ def list_users(request):
     context['page_title'] = 'Lista de Usuários' 
     return render(request, 'cadastro/pages/list_users.html', context)
 
-
+@login_required
 def search(request):
     context = dict()
     search_value = request.GET.get('search', '').strip()
