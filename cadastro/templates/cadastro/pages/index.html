@@ -3,4 +3,14 @@
 {% block content %}
     <div class="menu-spacing"></div>
     <h1>Hello World !!!</h1>
+    {% if messages %}
+            <div class="modal" id="success-modal">
+                <div class="modal-content">
+                    <p>{% for message in messages %}{{ message }}{% endfor %}</p>
+                    <form method="GET" action="{% url 'cadastro:index' %}">
+                        <button type="submit" class="btn btn-send">OK</button>
+                    </form>
+                </div>
+            </div>
+    {% endif %}
 {% endblock content %}

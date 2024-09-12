@@ -395,7 +395,7 @@ p {
     justify-content: center;
 }
 
-.btn-content a {
+.btn-content a, button {
     display: inline-block; 
     padding: 10px;
     background-color: var(--white-color);
@@ -410,6 +410,11 @@ p {
 .btn-content a:hover {
     transform: translateY(-5px); 
 }
+
+.btn-content button:hover {
+    transform: translateY(-5px); 
+}
+
 
 #update {
     background-color: var(--green-color);

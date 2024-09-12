@@ -14,7 +14,7 @@
 
 <div class="btn-content">
     <a id="update" href="{% url 'cadastro:update_user' current_user.id %}">Update</a>
-    <a id="delete" href="{% url 'cadastro:index' %}">Delete</a>
+    <a id="delete" href="{% url 'cadastro:delete_user' current_user.id %}">Delete</a>
     <a id="cancel" href="{% url 'cadastro:list_users' %}">Cancel</a>
 </div>
 

@@ -103,7 +103,6 @@ def view_user(request, id):
 def update_user(request, id):
     context = dict()
     current_user = User.objects.filter(is_staff=False).filter(id=id).first()
-    print(current_user)
     
     if not current_user:
         messages.error(request, 'Usuário não encontrado.')
@@ -124,3 +123,22 @@ def update_user(request, id):
     context['current_user'] = current_user
     context['page_title'] = 'Update User'
     return render(request, 'cadastro/pages/update_user.html', context)
+
+
+@login_required
+def delete_user(request, id):
+    context = dict()
+    current_user = User.objects.filter(is_staff=False).filter(id=id).first()
+    confirmation = request.POST.get('confirmation', 'no')
+    if not current_user:
+        messages.error(request, 'Usuário não encontrado.')
+        return redirect('cadastro:index')
+    if request.method == 'POST':
+        current_user.delete()
+        messages.success(request, 'Usuário deletado com sucesso.')
+        return redirect('cadastro:index')
+
+    context['page_title'] = 'Delete User'
+    context['current_user'] = current_user
+    context['confirmation'] = confirmation
+    return render(request, 'cadastro/pages/delete_user.html', context)

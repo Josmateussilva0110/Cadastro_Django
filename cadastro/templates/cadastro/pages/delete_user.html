@@ -1,0 +1,34 @@
+{% extends "cadastro/base.html" %}
+
+{% block content %}
+<div class="menu-spacing"></div>
+
+<div class="form-container">
+    <div class="form">
+        <h4>Deseja deletar esse usuário?</h4>
+        <div class="parent-container">
+            <div class="detail-user">
+                <p><strong>Username:</strong> {{ current_user.username }}</p>
+            </div>
+        </div>
+        <form method="POST" action="{% url 'cadastro:delete_user' current_user.id %}">
+            {% csrf_token %}
+            <div class="btn-content">
+                <button type="submit" id="update">Delete</button>
+                <a href="{% url 'cadastro:list_users' %}" id="delete">Cancel</a>
+            </div>
+        </form>
+        {% if messages %}
+            <div class="modal" id="success-modal">
+                <div class="modal-content">
+                    <p>{% for message in messages %}{{ message }}{% endfor %}</p>
+                    <form method="GET" action="{% url 'cadastro:index' %}">
+                        <button type="submit" class="btn btn-send">OK</button>
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}
