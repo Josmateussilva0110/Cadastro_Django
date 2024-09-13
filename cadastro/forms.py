@@ -7,6 +7,24 @@ from django.contrib.auth.models import User
 
 
 class Register_User(forms.ModelForm):
+    """
+    Formulário de registro de usuários.
+    Este formulário é utilizado para criar um novo usuário no sistema, 
+    com validação adicional para senhas e campos de nome.
+
+    Atributos:
+        password (CharField): Campo de senha com widget de entrada oculta.
+        password2 (CharField): Campo de confirmação de senha com widget de entrada oculta.
+    
+    Métodos: clean(): Realiza a validação dos campos e garante que os nomes 
+                 'first_name' e 'last_name' não sejam iguais.
+        clean_password(): Valida a senha utilizando as validações padrão do Django.
+        clean_password2(): Verifica se as senhas inseridas são iguais.
+        clean_username(): Valida se o nome de usuário já está em uso.
+        clean_email(): Valida se o email já está em uso.
+        save(): Salva o usuário no banco de dados após criptografar a senha.
+    """
+
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'placeholder': 'Your password'}),
         label='password'
@@ -75,12 +93,35 @@ class Register_User(forms.ModelForm):
 
 
 class Login_user(forms.Form):
+    """
+    Formulário de login de usuários.
+
+    Este formulário é utilizado para autenticar um usuário com base no nome de usuário 
+    e senha.
+
+    Atributos:
+        username (CharField): Campo de nome de usuário.
+        password (CharField): Campo de senha com widget de entrada oculta.
+    """
+
     username = forms.CharField(max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Your username'}))
      
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Your password'}))
 
 
 class Update_User(forms.ModelForm):
+    """
+    Formulário de atualização de usuários.
+
+    Este formulário permite que os usuários atualizem seus dados pessoais, 
+    como nome, sobrenome, email e nome de usuário.
+
+    Métodos: clean(): Realiza a validação dos campos e garante que os nomes 
+                 'first_name' e 'last_name' não sejam iguais.
+        clean_email(): Verifica se o email inserido já está em uso por outro usuário.
+        clean_username(): Verifica se o nome de usuário já está em uso por outro usuário.
+        save(): Salva as alterações no banco de dados.
+    """
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email',]
